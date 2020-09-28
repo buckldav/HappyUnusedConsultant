@@ -1,18 +1,16 @@
-import React from 'react';
-import Nav from '../components/Nav';
+import { Heading } from '@chakra-ui/core'
+import React from 'react'
 
-const Page1 = () => (
+const ToDo = () => (
   <>
-    <Nav />
-    <h1>Page1</h1>
+    <Heading as="h1" size="xl">ToDo</Heading>
   </>
 )
 
-const Page2 = () => (
+const Archive = () => (
   <>
-    <Nav />
-    <h1>Page2</h1>
+    <Heading as="h1" size="xl">Archive</Heading>
   </>
 )
 
-export { Page1, Page2 };
+export { ToDo, Archive };
