@@ -1,7 +1,7 @@
 ### 1. Chakra Integration
-1. Chakra [Getting Started](https://chakra-ui.com/getting-started)
+* Chakra [Getting Started](https://chakra-ui.com/getting-started)
 ```bash
-npm install @chakra-ui/core @emotion/core @emotion/styled emotion-theming
+yarn add @chakra-ui/core @emotion/core @emotion/styled emotion-theming
 ```
 Include ```customTheme```, ```Theme Provider```, and ```CSSReset```
 
