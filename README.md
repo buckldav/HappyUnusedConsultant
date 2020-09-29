@@ -1,66 +1,60 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 1. Chakra Integration
+1. Chakra [Getting Started](https://chakra-ui.com/getting-started)
+```bash
+npm install @chakra-ui/core @emotion/core @emotion/styled emotion-theming
+```
+Include ```customTheme```, ```Theme Provider```, and ```CSSReset```
 
-## Running on Repl.it
+#### Theming
+##### Fonts
+* Use the ```<link>``` in the HTML instead of CSS ```@import```
+```javascript
+fonts: {
+  heading: "",
+  body: "",
+  mono: "",
+},
+```
+##### Colors
+* Show them the brand colors example
+```javascript
+colors: {
+  ...theme.colors,
+  brand: {
+    900: "#1a365d",
+    800: "#153e75",
+    700: "#2a69ac",
+    // ...
+  },
+}
+```
 
-Simply hit run once and start coding. Will hot reload the web view. 
+### 2. Layout and Nav
+Make a Layout.js, explain props
 
-## Running Scripts
+Refactor Nav to live in Layout.js
+Use Flex to make a better Nav
+```javascript
+const Nav = () => (
+  <Flex id="header" justify="space-between" p={4} bg="blue.300" color="white">
+    <nav>
+      <Link to="/">To Do</Link>
+      <Link to="/archive">Archive</Link>
+    </nav>
+    <Heading as="span" size="sm"><Link to="/">My ToDo</Link></Heading>
+  </Flex>
+)
+```
 
-You can open a new shell window by hitting command+shift+S on macOS or control+shift+S (you can also access shortcuts from the `?` in the bottom right corner).
+### 3. Rewrite page names
+```javascript
+<Route exact path="/">
+  <ToDo />
+</Route>
+<Route path="/archive">
+  <Archive />
+</Route>
+```
 
-When in the shell you can run any of the following scripts:
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+*later: App will have state, pass everything as props down below*

@@ -1,3 +1,6 @@
-a {
-  padding: 10px;
+header a {
+  padding: 0 10px;
+}
+header span {
+  line-height: normal !important;
 }
