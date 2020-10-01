@@ -56,5 +56,73 @@ const Nav = () => (
 </Route>
 ```
 
+### 2. State and props
 
-*later: App will have state, pass everything as props down below*
+[Here's some diagrams about state and props](https://docs.google.com/document/d/1xKHi-iygRBYHpGHbY5e9AbTVJ8HULHZMJMcPVcCs4xY/edit)
+
+1. Refactor App.js to be a class component with a state in the constructor.
+
+```javascript
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      todo: []
+    }
+  }
+
+  handleCreate(value) {
+    console.log(value)
+  }
+
+  render() {
+    return (
+      ...
+    )
+  }
+} 
+```
+
+2. New file: Tasks.js in components/. Create functional component: AddTaskModal from [here](https://chakra-ui.com/modal).
+  * Make a form, pass in the handleCreate in props. [Chakra Form Control](https://chakra-ui.com/formcontrol).
+  * Pass the handleCreate in ```props -> ToDo -> AddTaskModal```.
+```javascript
+// AddTaskModal component in Tasks.js
+...
+const submitForm = (e) => {
+  e.preventDefault()
+  props.handleCreate(document.getElementById('task').value)
+  onClose()
+}
+...
+<form onSubmit={submitForm}>
+  <ModalBody>
+    <FormControl>
+      <FormLabel htmlFor="task">New Task</FormLabel>
+      <Input type="text" id="task" aria-describedby="add a task" />
+    </FormControl>
+  </ModalBody>
+
+  <ModalFooter>
+    <Button variant="ghost" onClick={onClose}>Cancel</Button>
+    <Button variantColor="blue" mr={3} type="submit">
+      Add
+    </Button>
+  </ModalFooter>
+</form>
+...
+```
+
+3. Show all the Tasks using ```Array.map``` and [Chakra List](https://chakra-ui.com/list).
+
+```javascript
+const ToDo = (props) => (
+  <>
+    <Heading as="h1" size="xl">ToDo</Heading>
+    <AddTaskModal handleCreate={props.handleCreate} />
+    <List mt={2} minW={400} spacing={1}>
+      {props.todo.map(val => <ListItem p={2} border="1px" borderRadius="md" borderColor="gray.200">{val}</ListItem>)}
+    </List>
+  </>
+)
+```

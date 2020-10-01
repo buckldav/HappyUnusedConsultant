@@ -25,23 +25,38 @@ const customTheme = {
   },
 };
 
-function App() {
-  return (
-    <BrowserRouter>
-      <ThemeProvider theme={customTheme}>
-        <CSSReset />
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      todo: []
+    }
+  }
 
-        <Layout>
-          <Route exact path="/">
-            <ToDo />
-          </Route>
-          <Route path="/archive">
-            <Archive />
-          </Route>
-        </Layout>
-      </ThemeProvider>
-    </BrowserRouter>
-  );
+  handleCreate(value) {
+    const todo = this.state.todo
+    todo.push(value)
+    this.setState({ todo })
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <ThemeProvider theme={customTheme}>
+          <CSSReset />
+
+          <Layout>
+            <Route exact path="/">
+              <ToDo todo={this.state.todo} handleCreate={this.handleCreate.bind(this)} />
+            </Route>
+            <Route path="/archive">
+              <Archive />
+            </Route>
+          </Layout>
+        </ThemeProvider>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
