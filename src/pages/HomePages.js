@@ -1,27 +1,28 @@
-import { Heading, List, ListItem } from '@chakra-ui/core'
+import { Heading } from '@chakra-ui/core'
 import React from 'react'
-import { AddTaskModal } from '../components/Tasks'
+import { AddTaskModal, ListTasks } from '../components/Tasks'
 
 const ToDo = props => (
   <>
     <Heading as="h1" size="xl">ToDo</Heading>
     <AddTaskModal handleCreate={props.handleCreate} />
-    <List mt={2} minW={400} spacing={1}>
-      {props.todo.map(val => <ListItem 
-        p={2}
-        border="1px"
-        borderRadius="md"
-        borderColor="gray.200"
-      >
-        {val}
-      </ListItem>)}
-    </List>
+    <ListTasks 
+      todo={props.todo}
+      isToDoPage={true}
+      handleDelete={props.handleDelete} 
+      handleArchive={props.handleArchive}
+    />
   </>
 )
 
-const Archive = () => (
+const Archive = (props) => (
   <>
     <Heading as="h1" size="xl">Archive</Heading>
+    <ListTasks 
+      todo={props.todo}
+      isToDoPage={false}
+      handleDelete={props.handleDelete} 
+    />
   </>
 )
 

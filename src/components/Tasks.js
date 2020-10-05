@@ -7,6 +7,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  List, ListItem, Flex, IconButton,
   useDisclosure, Button, FormControl, FormLabel, Input
 } from "@chakra-ui/core";
 
@@ -48,4 +49,34 @@ const AddTaskModal = props => {
   );
 }
 
-export { AddTaskModal }
+const ListTasks = props => (
+  <List mt={2} minW={400} spacing={1}>
+    {props.todo.map((val, i) => <ListItem 
+      p={2}
+      border="1px"
+      borderRadius="md"
+      borderColor="gray.200"
+    >
+      <Flex align="center" justify="space-between">
+        <span>{val}</span>
+        <span>
+          {props.isToDoPage ? <IconButton
+            variantColor="green" 
+            aria-label="Complete" 
+            icon="check" 
+            mr={2}
+            onClick={() => {props.handleArchive(val, i)}} 
+          /> : null}
+          <IconButton 
+            variantColor="red" 
+            aria-label="Delete" 
+            icon="delete" 
+            onClick={() => {props.handleDelete(i)}} 
+          />
+        </span>
+      </Flex>
+    </ListItem>)}
+  </List>
+)
+
+export { AddTaskModal, ListTasks }

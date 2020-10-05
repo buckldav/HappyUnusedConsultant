@@ -1,4 +1,5 @@
-### 1. Chakra Integration
+## A. Chakra Integration
+### 1. Getting Started
 * Chakra [Getting Started](https://chakra-ui.com/getting-started)
 ```bash
 yarn add @chakra-ui/core @emotion/core @emotion/styled emotion-theming
@@ -56,7 +57,7 @@ const Nav = () => (
 </Route>
 ```
 
-### 2. State and props
+## B. State and props
 
 [Here's some diagrams about state and props](https://docs.google.com/document/d/1xKHi-iygRBYHpGHbY5e9AbTVJ8HULHZMJMcPVcCs4xY/edit)
 
@@ -125,4 +126,35 @@ const ToDo = (props) => (
     </List>
   </>
 )
+```
+
+## C. Delete and archive
+1. Add buttons and delete function
+```javascript
+// App.js
+handleDelete(i) {
+  const todo = this.state.todo
+  todo.splice(i, 1)
+  this.setState({ todo })
+}
+
+// HomePages.js -> Todo
+// ...
+<List mt={2} minW={400} spacing={1}>
+  {props.todo.map((val, i) => <ListItem 
+    p={2}
+    border="1px"
+    borderRadius="md"
+    borderColor="gray.200"
+  >
+    <Flex justify="space-between" align="center"> 
+      <span>{val}</span>
+      <span>
+        <IconButton variantColor="green" aria-label="Archive" icon="check" mr={2} />
+        <IconButton variantColor="red" aria-label="Delete" icon="delete" onClick={() => {props.handleDelete(i)}} />
+      </span>
+    </Flex>
+  </ListItem>)}
+</List>
+// ...
 ```
