@@ -158,3 +158,26 @@ handleDelete(i) {
 </List>
 // ...
 ```
+
+## D. React lifecycle and persistence using localStorage
+* https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+* State callback
+```javascript
+updateStorage() {
+  localStorage.removeItem("state")
+  localStorage.setItem("state", JSON.stringify(this.state))
+  console.log("Storage", localStorage)
+}
+// ...
+this.setState({ ... }, this.updateStorage)
+```
+* Lifecycle, load state from localStorage - [diagram](https://drive.google.com/file/d/1UjLPxJla9wKH5Hg7JAYF86DXCFsCu3Wf/view)
+```javascript
+componentDidMount() {
+  const state = localStorage.getItem("state")
+  console.log(state)
+  if (state) {
+    this.setState(JSON.parse(state))
+  }
+}
+```

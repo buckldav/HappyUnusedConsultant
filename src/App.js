@@ -38,25 +38,38 @@ class App extends React.Component {
     this.handleDelete(i)
     const archive = this.state.archive
     archive.push(value)
-    this.setState({ archive })
+    this.setState({ archive }, this.updateStorage)
   }
 
   handleCreate(value) {
     const todo = this.state.todo
     todo.push(value)
-    this.setState({ todo })
+    this.setState({ todo }, this.updateStorage)
   }
 
   handleDelete(i) {
     const todo = this.state.todo
     todo.splice(i, 1)
-    this.setState({ todo })
+    this.setState({ todo }, this.updateStorage)
   }
 
   handleDeleteArchive(i) {
     const archive = this.state.archive
     archive.splice(i, 1)
-    this.setState({ archive })
+    this.setState({ archive }, this.updateStorage)
+  }
+
+  updateStorage() {
+    localStorage.removeItem("state")
+    localStorage.setItem("state", JSON.stringify(this.state))
+    console.log(localStorage)
+  }
+
+  componentDidMount() {
+    const state = localStorage.getItem("state")
+    if (state) {
+      this.setState(JSON.parse(state))
+    }
   }
 
   render() {
